@@ -26,4 +26,8 @@
     require 'config.php';
     require 'views/agregar-propiedad.view.php';
 
+    function GetMuni($id){
+        return $res="Holamundo ".$id;
+    }
+
 ?>

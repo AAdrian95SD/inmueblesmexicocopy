@@ -282,9 +282,10 @@
                                 <circle cx="12" cy="12" r="10"></circle>
                                 </svg><span>Agentes</span></div>
                     </li>
-                    <li class="menu">
+
+                    <li class="menu" id="ListAgentes" >
                         <a href="<?php echo RUTA ?>agentes.php" aria-expanded="false" class="dropdown-toggle">
-                            <div class="">
+                            <div class=""> 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 <span>Lista de agentes</span>
                             </div>
@@ -292,9 +293,12 @@
                     </li>
 
                     <li class="menu menu-heading">
-                        <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
+                        <a href="<?php echo RUTA ?>Suscripcion.php" aria-expanded="false" class="dropdown-toggle">
+                            <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
                                 <circle cx="12" cy="12" r="10"></circle>
-                                </svg><span>Suscripción</span></div>
+                                </svg><span>Suscripción</span>
+                            </div>
+                        </a>
                     </li>
 
                     <li class="menu menu-heading">
@@ -941,8 +945,7 @@
                                 <a href="starter_kit_collapsible_menu.html"> Collapsible </a>
                             </li>
                         </ul>
-                    </li>
-
+                    </li> 
                     <li class="menu">
                         <a href="../../documentation/index.html" aria-expanded="false" class="dropdown-toggle">
                             <div class="">
@@ -953,12 +956,16 @@
                                 <span>Documentation</span>
                             </div>
                         </a>
-                    </li> 
-
-                </ul>
-
-            </nav>
-
+                    </li>  
+                </ul> 
+            </nav> 
         </div>
-
-        <!--  END SIDEBAR  -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script type="text/javascript">  
+            var __Inmobiliario = "<?php echo $usuario[0][11];?>";
+            $(document).ready(function () {
+                debugger
+                MostrarContactForm();
+            });   
+        </script>
+<!--  END SIDEBAR  -->

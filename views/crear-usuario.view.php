@@ -119,11 +119,11 @@ include 'utils.php';
                                 <div class="content with-padding">             
                                     <div class="col-md-6">
                                         <h5>Correo electrónico</h5>
-                                        <input class="search-field" placeholder="Correo electrónico" type="email" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" name ="emalAcce" placeholder="Correo electrónico" type="email" name="title" required autocomplete="off"/>				  
                                     </div>   
                                     <div class="col-md-6">
                                         <h5>Contraseña</h5>
-                                        <input class="search-field" placeholder="Contraseña" type="password" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" name ="passw" placeholder="Contraseña" type="password" name="title" required autocomplete="off"/>				  
                                     </div>  
                                     <div class="col-md-6">
                                         <h5>Confirmar contraseña</h5>
@@ -151,20 +151,34 @@ include 'utils.php';
                                 <div class="content with-padding">  
                                 <div class="col-md-4">
                                         <h5>Nombre</h5>
-                                        <input class="search-field" placeholder="Nombre" type="text" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" name ="nombre" placeholder="Nombre" type="text" name="title" required autocomplete="off"/>				  
                                     </div>
                                     <div class="col-md-4">
                                         <h5>Apellido paterno</h5>
-                                        <input class="search-field" placeholder="Apellido paterno" type="text" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" name ="paterno" placeholder="Apellido paterno" type="text" name="title" required autocomplete="off"/>				  
                                     </div>
                                     <div class="col-md-4">
                                         <h5>Apellido materno</h5>
-                                        <input class="search-field" placeholder="Apellido materno" type="text" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" name ="materno" placeholder="Apellido materno" type="text" name="title" required autocomplete="off"/>				  
                                     </div>  
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <h5>Teléfono</h5>
-                                        <input class="search-field" placeholder="Teléfono" type="phone" name="title" required autocomplete="off"/>				  
-                                    </div>                                                                                                                                        
+                                        <input class="search-field" placeholder="Teléfono" type="number" name="telefono" id="telefono" minlength="8" maxlength="10" required autocomplete="off"/>				  
+                                        <span class="alert alert-danger" style="display: none;" id="MensajeTel">Escriba el numero telefono correctamente</span>
+                                    </div>    
+                                    <div class="col-md-4">
+                                        <h5>¿Pertence a una Inmobiliarias?</h5>
+                                        <select id="Sele_inmo" class="search-field" name="Sele_inmo" >
+                                            <option value="0"> No </option> 
+                                            <option value="Si"> Si</option>   
+                                        </select>				  
+                                    </div>
+                                    <div class="col-md-4" style="display: none;"  id="ListInmovi">
+                                        <h5>Selecciona la Inmobiliarias</h5>
+                                        <select id="SeleInmobiliaria" class="search-field"  name="SeleInmobiliaria" value="0"> 
+                                            <option value="0">Selecciona la Inmobiliarias</option> 
+                                        </select>
+                                    </div>                                                                                                                                         
                                 </div>
                             </div>
                             <!-- Section / End --> 
@@ -177,7 +191,7 @@ include 'utils.php';
                             <div class="row">
                                 <div class="col-md-12">
                                     
-                                    <input type="submit" class="button full-width border margin-top-10" name="submit" value="Crear" />
+                                    <button type="submit" class="button full-width border margin-top-10" name="submit" value="agente-create">Crear</button>
                                 </div>	
                             </div>
                         </div>
@@ -373,7 +387,42 @@ include 'utils.php';
                 }
                 });
           });
-        
+          /////Mostra lista de inmoviliarias registradas
+          $('#Sele_inmo').change(function(){  
+                var  type = $("#Sele_inmo").val(); 
+                var element = document.getElementById("ListInmovi");
+                if (type == 'Si') {
+                    element.style.display='block';
+                    $('option', '#SeleInmobiliaria').remove();
+                    $.ajax({
+                        type: "GET",
+                        url: "getInmobiliarias.php?", 
+                        success: function(data){ 
+                            console.log(data);  var i; debugger 
+                            var opts = $.parseJSON(data); 
+                            $.each(opts, function(i, d) { 
+                                $('#SeleInmobiliaria').append('<option value="' + d.id + '">' + d.nombre + '</option>');
+                            });  
+                        }
+                    });
+                }else {
+                    element.style.display='none'; 
+                    $('option', '#SeleInmobiliaria').remove();
+                } 
+            });
+            $('#telefono').change(function() { 
+                var  type = $("#telefono").val(); 
+                var eleme = document.getElementById("MensajeTel");
+                if(type.length < 10 || type.length < 8 || type.length > 10){
+                    //alert(type.length);
+                    $('#telefono').attr('style','border: 1px solid #ca223c;'); 
+                    document.getElementById('telefono').value = ''; 
+                    eleme.style.display='block';
+                }else{ 
+                    $('#telefono').attr('style','border: 1px solid #dde6ef;');  
+                    eleme.style.display='none';
+                }
+		    });
         </script>
         <script>
             $(".dropzone").dropzone({

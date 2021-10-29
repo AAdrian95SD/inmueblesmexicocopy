@@ -18,21 +18,16 @@ if(isset($_POST["submit"])) {
 
 switch ($_POST["submit"]){
     case "login":
-        
         $datosRecibidos['username'] = $_POST['email'];
         $datosRecibidos['password'] = $_POST['password'];
-        
-        
         $respuesta = $controller->login($datosRecibidos);
-        
         $agentes = $controller->getAgentes();
-        
         if($respuesta['menssage'] === 'success'){
             if (!isset($_SESSION)) { session_start();}
             //$_SESSION['agentes'] = $agentes;
             $_SESSION['login'] = true;
             $_SESSION['login_id'] = $respuesta['userID'];
-            header("location:webadmin/index.php");
+            header("location: webadmin/index.php");
             die();    
         }else{
             if (!isset($_SESSION)) { session_start();}
@@ -40,15 +35,9 @@ switch ($_POST["submit"]){
             header("location:login.php");
             //die();
         }
-        
-        
-        
-        break;
+    break;
     case "Crear":
-            
-        
         if (!isset($_SESSION)) { session_start();}
-        
         if($_POST['estatus'] === ""){
             $_SESSION['Error'] = "Error, no selecciono un ESTATUS";
             header("location:create.php");
@@ -84,16 +73,12 @@ switch ($_POST["submit"]){
             header("location:create.php");
             die();   
         }
-        
-        
-        
         $respuesta = $controller->createPropiedad($_POST);
-        
         
         if($respuesta['menssage'] === 'success'){
             if (!isset($_SESSION)) { session_start();}
             $_SESSION['success'] = "Propiedad creada correctamente";
-            header("location:create.php");
+            header("location: webadmin/propiedades.php");
             die();    
         }else{
             if (!isset($_SESSION)) { session_start();}
@@ -101,56 +86,36 @@ switch ($_POST["submit"]){
             header("location:login.php");
             //die();
         }
-        
-        
-        
-        break;
-    case "agente-create":
-            
-        
-        if (!isset($_SESSION)) { session_start();}
-        
-        
+    break;
+    case "agente-create": 
+        if (!isset($_SESSION)) { session_start();} 
         if($_POST['inmobiliaria'] === ""){
             $_SESSION['Error'] = "Error, no selecciono una inmobiliaria";
-            header("location:agent.php");
+            header("location: crear-usuario.php");
             die();   
-        }
-        
-        
-        $respuesta = $controller->createAgente($_POST);
-        
+        } 
+        $respuesta = $controller->createAgente($_POST); 
         
         if($respuesta['menssage'] === 'success'){
             if (!isset($_SESSION)) { session_start();}
-            $_SESSION['success'] = "agente creado correctamente";
-            header("location:agent.php");
+                $_SESSION['success'] = "agente creado correctamente";
+                header("location:webadmin/index.php");
             die();    
         }else{
             if (!isset($_SESSION)) { session_start();}
-            $_SESSION['Error'] = "Error al crear el agente";
-            header("location:agent.php");
+                $_SESSION['Error'] = "Error al crear el agente";
+                 header("location: crear-usuario.php");
             //die();
         }
-        
-        
-        
-        break;    
-        case "Editar agente":
-            
-        
+    break;    
+    case "Editar agente":
         if (!isset($_SESSION)) { session_start();}
-        
-        
         if($_POST['inmobiliaria'] === ""){
             $_SESSION['Error'] = "Error, no selecciono una inmobiliaria";
             header("location:agent-all.php");
             die();   
         }
-        
-        
         $respuesta = $controller->editAgente($_POST);
-        
         
         if($respuesta['menssage'] === 'success'){
             if (!isset($_SESSION)) { session_start();}
@@ -162,16 +127,10 @@ switch ($_POST["submit"]){
             $_SESSION['Error'] = "Error al editar el agente";
             header("location:agent-all.php");
             //die();
-        }
-        
-        
-        
-        break;    
-        case "Editar":
-            
-        
+        }  
+    break;    
+    case "Actualizar": 
         if (!isset($_SESSION)) { session_start();}
-        
         if($_POST['estatus'] === ""){
             $_SESSION['Error'] = "Error, no selecciono un ESTATUS";
             header("location:update.php?propiedad=".$_POST['id']);
@@ -201,27 +160,21 @@ switch ($_POST["submit"]){
             $_SESSION['Error'] = "Error, no selecciono un AGENTE";
             header("location:update.php?propiedad=".$_POST['id']);
             die();   
-        }
-        
-        
+        } 
         $respuesta = $controller->editPropiedad($_POST);
-        
-        
+         
         if($respuesta['menssage'] === 'success'){
             if (!isset($_SESSION)) { session_start();}
             $_SESSION['success'] = "Propiedad editada correctamente";
-            header("location:consulta.php");
+            header("location: webadmin/propiedades.php");
             die();    
         }else{
             if (!isset($_SESSION)) { session_start();}
             $_SESSION['Error'] = "Error al editar la propiedad";
-            header("location:consulta.php");
+            header("location: webadmin/index.php");
             //die();
-        }
-        
-        
-        
-        break;
+        }  
+    break;
     case "delete_pic":
             
         //$target_dir = "img_dir/";

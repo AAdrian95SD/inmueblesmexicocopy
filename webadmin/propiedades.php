@@ -11,9 +11,13 @@
 
     $controller = new Controller();
     $usuario = $controller->getUserDetail($_SESSION['login_id']);
-
+    
     $respuesta = $controller->getPropiedadesByInmobiliaria($usuario[0][11]);
-
+    if($_SESSION['success']){
+        $result = "Hay resultado";
+    }else{
+        $result = "No Hay resultado";
+    }
     require 'config.php';
     require 'views/propiedades.view.php';
 

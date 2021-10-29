@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en"> 
 <?php
-    require 'estilos.php';
-
+    require 'estilos.php'; 
     require 'header.view.php';
 ?>
         

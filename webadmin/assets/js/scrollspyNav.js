@@ -20,3 +20,13 @@ menuItems.on('click', function(event) {
     }, 800);
   }  // End if
 });
+
+
+function MostrarContactForm(){ 
+  var element = document.getElementById("ListAgentes");
+  if (__Inmobiliario == '0') {
+      element.style.display='none';
+  }else {  
+      element.style.display='block'; 
+  } 
+}

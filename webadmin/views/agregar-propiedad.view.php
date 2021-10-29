@@ -3,6 +3,8 @@ require 'estilos.php';
 require 'header.view.php';
 
 ?>
+
+<?php foreach ($usuario as $estado) { $idInmob = $estado[11]; $idUSer = $estado[12];} ?>
 <!--  BEGIN CONTENT AREA  -->
 <div id="content" class="main-content">
     <div class="layout-px-spacing">
@@ -97,13 +99,12 @@ require 'header.view.php';
                                 <h4 id="tituloFrom">Ubicación</h4>
                             </div>
                         </div>
-                    </div>
-
+                    </div> 
                     <div id="fondoBlanco">
                         <div class="form-row mb-4">
                             <div class="form-group col-md-6">
                                 <label for="inputState">Estado</label>
-                                <select id="inputState" class="form-control" name="estado">
+                                <select id="inputEstado" class="form-control" name="estado">
                                     <option selected>Elegir...</option>
                                     <?php
                                     foreach ($estados as $estado) {
@@ -122,13 +123,8 @@ require 'header.view.php';
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputState">Municipio</label>
-                                <select id="inputState" class="form-control" name="municipio">
-                                    <option selected>Elegir...</option>
-                                    <?php
-                                    foreach ($municipios as $municipio) {
-                                        print '<option value="' . $municipio[0] . '">' . $municipio[1] . '</option>';
-                                    }
-                                    ?>
+                                <select id="inputMunicipio" class="form-control" name="municipio">
+                                    <option selected>Elegir...</option> 
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -188,7 +184,7 @@ require 'header.view.php';
                     </div>
                 </div>
             </div>
-            <div id="flFormsGrid" class="col-lg-12 layout-spacing">
+            <div id="flFormsGrid" class="col-lg-12 layout-spacing" style="display: none;" >
                 <div class="statbox widget box box-shadow">
 
                     <div id="tituloForm">
@@ -204,7 +200,7 @@ require 'header.view.php';
                             <div class="form-group col-md-6">
                                 <label for="inputState">Agente</label>
                                 <select id="inputState" class="form-control"  name="agente">
-                                    <option selected>Elegir...</option>
+                                    <option selected value="<?php echo $idUSer;?>">Elegir...</option>
                                     <?php
                                     foreach ($agentes as $field) {
 
@@ -216,7 +212,7 @@ require 'header.view.php';
                             <div class="form-group col-md-6">
                                 <label for="inputState">Inmobiliaria</label>
                                 <select id="inputState" class="form-control" name="inmobiliaria">
-                                    <option selected>Elegir...</option>
+                                    <option selected value="0">Elegir...</option>
                                     <?php
                                     foreach ($inmobiliarias as $field) {
                                         if ($usuario[0][11] == $field[0]) {
@@ -238,7 +234,41 @@ require 'header.view.php';
 
 <!--  END CONTENT AREA  -->
 </div>
-</div>
+</div> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">  
+    $(document).ready(function () {
+        MostrarContactForm();
+    }); 
+    //alert("hola mundo");
+    $('#inputEstado').change(function(){  
+        var  type_ = $("#inputEstado").val();  
+            $('option', '#inputMunicipio').remove();
+            $.ajax({
+                type: "GET",
+                url: "../GetMunicipio.php?Id="+type_, 
+                success: function(data){ 
+                    console.log(data);  var i; debugger 
+                    $('#inputMunicipio').append('<option value="0">Selecciona un municipio</option>');
+                    var opts = $.parseJSON(data); 
+                    $.each(opts, function(i, d) { 
+                        $('#inputMunicipio').append('<option value="' + d.id + '">' + d.nombre + '</option>');
+                    });  
+                }
+            }); 
+    }); 
+
+    function MostrarContactForm(){
+        var  type = "<?php echo $idInmob; ?>"; 
+        //alert(type)
+        var element = document.getElementById("flFormsGrid");
+        if (type == '0') {
+            element.style.display='block'; 
+        }else {
+            element.style.display='none';  
+        } 
+    }
+</script> 
 <?php
 require 'footer.view.php';
 ?>
