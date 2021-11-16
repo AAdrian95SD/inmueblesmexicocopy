@@ -10,7 +10,7 @@
     <!--  END LOADER -->
 
     <!--  BEGIN NAVBAR  -->
-    <div class="header-container fixed-top">
+    <div class="header-container fixed-top" >
         <header class="header navbar navbar-expand-sm">
             <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -205,18 +205,18 @@
         <div class="search-overlay"></div>
 
         <!--  BEGIN SIDEBAR  -->
-        <div class="sidebar-wrapper sidebar-theme">
+        <div class="sidebar-wrapper sidebar-theme" id="sidebar2">
 
             <nav id="sidebar">
 
                 <ul class="navbar-nav theme-brand flex-row  text-center">
                     <li class="nav-item theme-logo">
-                        <a href="index.html">
+                        <a href="<?php echo RUTA ?>index.php">
                             <img src="../images/copoya_inmobiliaria_blanco4.png" class="navbar-logo" alt="Copoya">
                         </a>
                     </li>
                     <li class="nav-item theme-text">
-                        <a href="index.html" class="nav-link"> WebAdmin </a>
+                        <a href="<?php echo RUTA ?>index.php" class="nav-link"> WebAdmin </a>
                     </li>
                     <li class="nav-item toggle-sidebar">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left sidebarCollapse">

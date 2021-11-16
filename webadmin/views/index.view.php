@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <?php
+    session_start();
     require 'estilos.php'; 
     require 'header.view.php';
+
 ?>
         
         <!--  BEGIN CONTENT AREA  -->
@@ -444,9 +446,11 @@
 
     </div>
     <!-- END MAIN CONTAINER -->
+    
 
+</script>
     <?php 
-        require 'footer.view.php';
+        require 'footer.view.php'; 
     ?>
 
 

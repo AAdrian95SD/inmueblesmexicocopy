@@ -9,6 +9,7 @@ require '../Controller.php';
     } 
     $controller = new Controller();
     $inmobiliarias = $controller->getallInmobiliarias(); 
+    $Planes = $controller->getAllPlanes();
     $usuario = $controller->getUserDetail($_SESSION['login_id']);
     require 'suscripcion/index.php';
 ?>

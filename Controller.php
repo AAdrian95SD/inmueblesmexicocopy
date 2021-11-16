@@ -458,7 +458,27 @@ class Controller {
         }
         return $datos;
     }
+    public function getPropiedadesByIdUserReal($Id){
+        try {
+            $sql = "SELECT * FROM propiedades where agente_id=".$Id." and activo=1 order by id desc";
+            /* genera la conexión a la db */
+            $this->connectBD();
 
+            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Manejo de errores
+            $q = $this->conexion->prepare($sql);
+
+            $q->execute();
+
+            $datos = $q->fetchAll();
+            
+            $res['sts'] = 1;
+
+            $this->conexion = null;
+        } catch (PDOException $e) {
+            $res['sts'] = 0;
+        }
+        return $datos;
+    }
     public function getCompanyDetail($company){
         
         try {
@@ -1081,13 +1101,82 @@ class Controller {
             
         } catch (PDOException $exc) {
             $exc->errorInfo;
+        } 
+        return $respuesta; 
+    }
+    
+    public function getAllPlanes(){
+        try {
+            $sql = "SELECT * FROM planes";
+            /* genera la conexión a la db */
+            $this->connectBD();
+
+            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Manejo de errores
+            $q = $this->conexion->prepare($sql);
+
+            $q->execute();
+
+            $datos = $q->fetchAll();
+            
+            $res['sts'] = 1;
+
+            $this->conexion = null;
+        } catch (PDOException $e) {
+            $res['sts'] = 0;
+        }
+        return $datos;
+    }
+    public function getPlanesByid_agente($Id){
+        try {
+            $sql = "SELECT planes.id, planes.num_propiedades, agente_plan.id_agente FROM agente_plan INNER JOIN planes WHERE agente_plan.id_plan=planes.id AND agente_plan.id_agente=".$Id.";";
+            /* genera la conexión a la db */
+            $this->connectBD(); 
+            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Manejo de errores
+            $q = $this->conexion->prepare($sql); 
+            $q->execute(); 
+            $datos = $q->fetchAll(); 
+            $res['sts'] = 1; 
+            $this->conexion = null;
+        } catch (PDOException $e) {
+            $res['sts'] = 0;
+        }
+        return $datos;
+    }
+
+    public function CrearComprobante($id_plan,$id_agente,$tok){
+        try {
+            $sql = "call agentPlan(?,?,?,@mensaje);";
+            
+            $this->connectBD();
+            
+            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            
+            $q = $this->conexion->prepare($sql);
+            
+            $q->bindParam(1,$id_plan, PDO::PARAM_STR);
+            $q->bindParam(2,$id_agente, PDO::PARAM_STR); 
+            $q->bindParam(3,$tok, PDO::PARAM_STR);
+            
+            $q->execute();
+            
+            $q->closeCursor();
+            
+            //$output = $this->conexion->query("select @mensaje,@userID")->fectch(PDO::FETCH_ASSOC);
+            $output = $this-> conexion->  query("select @mensaje;")-> fetch(PDO::FETCH_ASSOC);
+            
+            
+            
+            if($output['@mensaje']  == "true"){
+                $respuesta = ['menssage' => 'success'];
+            }else{
+                $respuesta = ['message' => 'error al agregar imagen'];
+            }
+            
+        } catch (PDOException $exc) {
+            $exc->errorInfo;
         }
         
         return $respuesta;
-            
     }
-    
-    
-    
     
 }

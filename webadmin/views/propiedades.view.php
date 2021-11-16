@@ -18,7 +18,7 @@ require 'header.view.php';
         <?php if (isset($_SESSION['success'])) { ?>
             <div class="alert alert-success"> <?php echo $_SESSION['success'] ?> </div>
         <?php unset($_SESSION['success']); } ?>
-        <a href="<?php echo RUTA?>agregar-propiedad.php" class="btn btn-dark  mb-4 mr-2 btn-lg">Agregar propiedad</a>
+        <a href="<?php echo RUTA?>agregar-propiedad.php" class="btn btn-dark  mb-4 mr-2 btn-lg" id="addPropiedad">Agregar propiedad</a>
         <div class="layout-px-spacing">
 
             <div class="row layout-top-spacing" id="cancel-row">
@@ -39,7 +39,8 @@ require 'header.view.php';
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($respuesta as $elemento) : ?>
+                                    <?php 
+                                    foreach ($respuesta as $elemento) : ?>
                                         <tr>
                                             <td><?php echo $elemento[1] ?></td>
                                             <td><?php echo $elemento[2] ?></td>
@@ -70,6 +71,26 @@ require 'header.view.php';
         <!--  END CONTENT AREA  -->
     </div>
 </div>
+<script>
+    var cade = "<?php echo $resul[0][1];?>"; 
+    $(document).ready(function () { 
+        var num = parseInt(cade.substr(4,1));
+        var num1 = parseInt(cade.substr(0,1));
+        debugger
+        if(num1 == 3 && num == 6){
+            var total = parseInt("<?php echo $numero = count($respuesta);?>"); 
+           // alert("Plan basico"+total);
+            if(total > 6){
+                $('#addPropiedad').attr('style', 'display: none;');
+            }
+        }else if(num1 == 10 && num == 15){ 
+            //alert("Plan Premion");
+            if(total > 15){
+                $('#addPropiedad').attr('style', 'display: none;');
+            }
+        }
+    });  
+</script>
 <?php
 require 'footer.view.php';
 ?>

@@ -27,7 +27,7 @@ switch ($_POST["submit"]){
             //$_SESSION['agentes'] = $agentes;
             $_SESSION['login'] = true;
             $_SESSION['login_id'] = $respuesta['userID'];
-            header("location: webadmin/index.php");
+            header("location: webadmin/Suscripcion.php");
             die();    
         }else{
             if (!isset($_SESSION)) { session_start();}
@@ -99,8 +99,21 @@ switch ($_POST["submit"]){
         if($respuesta['menssage'] === 'success'){
             if (!isset($_SESSION)) { session_start();}
                 $_SESSION['success'] = "agente creado correctamente";
-                header("location:webadmin/index.php");
-            die();    
+                //header("location:webadmin/index.php");
+                //header("location: webadmin/Suscripcion.php");
+                //die();
+                $datosRecibidos['username'] = $_POST['emalAcce'];
+                $datosRecibidos['password'] = $_POST['passw'];
+                $respuesta = $controller->login($datosRecibidos);
+                $agentes = $controller->getAgentes();
+                if($respuesta['menssage'] === 'success'){
+                    if (!isset($_SESSION)) { session_start();}
+                    //$_SESSION['agentes'] = $agentes;
+                    $_SESSION['login'] = true;
+                    $_SESSION['login_id'] = $respuesta['userID'];
+                    header("location: webadmin/Suscripcion.php");
+                die();    
+            }   
         }else{
             if (!isset($_SESSION)) { session_start();}
                 $_SESSION['Error'] = "Error al crear el agente";
