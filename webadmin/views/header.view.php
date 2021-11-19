@@ -169,9 +169,9 @@
                                 <a class="" href="user_profile.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">
                                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                         <circle cx="12" cy="7" r="4"></circle>
-                                    </svg> My Profile</a>
+                                    </svg> Mi Perfil</a>
                             </div>
-                            <div class="dropdown-item">
+                            <!--div class="dropdown-item">
                                 <a class="" href="apps_mailbox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox">
                                         <polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline>
                                         <path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path>
@@ -182,13 +182,13 @@
                                         <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                         <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                     </svg> Lock Screen</a>
-                            </div>
+                            </div-->
                             <div class="dropdown-item">
-                                <a class="" href="auth_login.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
+                                <a OnclicK="cerrar_session()" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out">
                                         <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                         <polyline points="16 17 21 12 16 7"></polyline>
                                         <line x1="21" y1="12" x2="9" y2="12"></line>
-                                    </svg> Sign Out</a>
+                                    </svg> Cerrar Session</a>
                             </div>
                         </div>
                     </div>
@@ -292,14 +292,14 @@
                         </a>
                     </li>
 
-                    <li class="menu menu-heading">
-                        <a href="<?php echo RUTA ?>Suscripcion.php" aria-expanded="false" class="dropdown-toggle">
+                    <!--li class="menu menu-heading">
+                        <a href="<?php #echo RUTA ?>Suscripcion.php" aria-expanded="false" class="dropdown-toggle">
                             <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
                                 <circle cx="12" cy="12" r="10"></circle>
                                 </svg><span>Suscripción</span>
                             </div>
                         </a>
-                    </li>
+                    </li-->
 
                     <li class="menu menu-heading">
                         <div class="heading"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
@@ -961,10 +961,14 @@
             </nav> 
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script type="text/javascript">  
+        <script type="text/javascript">
+        
+            function cerrar_session() { 
+                window.location.href = "phpinfo.php";
+            }
+
             var __Inmobiliario = "<?php echo $usuario[0][11];?>";
-            $(document).ready(function () {
-                debugger
+            $(document).ready(function () { 
                 MostrarContactForm();
             });   
         </script>

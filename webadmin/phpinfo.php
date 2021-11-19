@@ -1,10 +1,10 @@
-<?php
-
-
-$a = 15;
-$b = 10;
-
-$total = $a + $b;
-
-echo $total;
+<?php 
+    if (!isset($_SESSION)) { session_start();}
+    $_SESSION['login_id']=null;
+    $_SESSION['login'] = null;
+    
+    if($_SESSION['login'] == null){
+        unset($_SESSION); 
+        header("location: ../index.php");
+    } 
 ?>

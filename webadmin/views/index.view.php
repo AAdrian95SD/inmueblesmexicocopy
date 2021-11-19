@@ -446,8 +446,37 @@
 
     </div>
     <!-- END MAIN CONTAINER -->
-    
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">   
+    $(document).ready(function () { 
+        var res = "<?php echo $id_pla;?>";
+        if( res != 0){
+            EnviarPFD();
+        }
+    }); 
+    function EnviarPFD(){  
+        var Datos ="<?php echo $DatosPa[0][3]?>" + " Propiedades a publicar con el es quema apagar de " + "<?php echo $DatosPa[0][1]?>"+ " Meses con el monto cargo a tu tarjeta es de " + "<?php echo $DatosPa[0][2]?>";
+        var Corre ="<?php echo $usuario[0][3];?>";
+        var Nombre ="<?php echo $usuario[0][1];?>" + " " +"<?php echo $usuario[0][2];?>";
+        $.ajax({ 
+            method: 'get',
+            url: '../Correos/Email.php',
+            data: { Fecha: Corre, nombre : Nombre , dato : Datos},
+            async: false, 
+                success: function(data){  
+                        console.log(data); 
+                        if(data == false){
+                                alert( "No se envio el comprobante a su correo"); 
+                        }else{
+                                alert( "Gracias por su atención" );
+                               // window.location.href = "https://www.volcanicpark.com.mx";
+                        }
+                },
+                error: function(){ 
+                   alert('No se puede acceder a la informacion');
+                }
+        });  
+    }  
 </script>
     <?php 
         require 'footer.view.php'; 

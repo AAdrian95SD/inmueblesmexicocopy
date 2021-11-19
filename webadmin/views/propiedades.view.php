@@ -13,10 +13,10 @@ require 'header.view.php';
             </div>
         </div>
         <?php  if (isset($_SESSION['Error'])) { ?>
-            <div class="alert alert-danger"> <?php echo $_SESSION['Error'] ?> </div>
+            <div class="alert alert-danger"> <?php echo $_SESSION['Error']; ?> </div>
         <?php  unset($_SESSION['Error']); } ?>
         <?php if (isset($_SESSION['success'])) { ?>
-            <div class="alert alert-success"> <?php echo $_SESSION['success'] ?> </div>
+            <div class="alert alert-success"> <?php echo $_SESSION['success']; ?> </div>
         <?php unset($_SESSION['success']); } ?>
         <a href="<?php echo RUTA?>agregar-propiedad.php" class="btn btn-dark  mb-4 mr-2 btn-lg" id="addPropiedad">Agregar propiedad</a>
         <div class="layout-px-spacing">

@@ -13,6 +13,7 @@
     }else{ 
         $respuesta = $controller->getPropiedadesByInmobiliaria($usuario[0][11]);
     }
+    
     if($_SESSION['success']){
         $result = "Hay resultado";
     }else{

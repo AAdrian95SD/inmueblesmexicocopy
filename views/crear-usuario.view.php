@@ -123,11 +123,13 @@ include 'utils.php';
                                     </div>   
                                     <div class="col-md-6">
                                         <h5>Contraseña</h5>
-                                        <input class="search-field" name ="passw" placeholder="Contraseña" type="password" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" name ="passw" id ="passwor" placeholder="Contraseña" type="password" name="title" required autocomplete="off"/>
+                                        <span class="alert alert-danger" style="display: none;" id="MensajePass">Las contraseñas no coenciden </span>				  
                                     </div>  
                                     <div class="col-md-6">
                                         <h5>Confirmar contraseña</h5>
-                                        <input class="search-field" placeholder="Contraseña" type="password" name="title" required autocomplete="off"/>				  
+                                        <input class="search-field" placeholder="Contraseña" id ="passwor2" type="password" name="title" required autocomplete="off"/>		
+                                        <span class="alert alert-danger" style="display: none;" id="MensajePass2">Las contraseñas no coenciden </span>		  
                                     </div>      
                                                                                                                                                                                             
                                 </div>
@@ -421,6 +423,25 @@ include 'utils.php';
                 }else{ 
                     $('#telefono').attr('style','border: 1px solid #dde6ef;');  
                     eleme.style.display='none';
+                }
+		    });
+            $('#passwor2').change(function() { 
+                var  type = $("#passwor2").val(); 
+                var type2 = $("#passwor").val();
+                var eleme = document.getElementById("MensajePass2");
+                var eleme2 = document.getElementById("MensajePass");
+                if(type == type2){ 
+                    $('#passwor2').attr('style','border: 1px solid #dde6ef;');  
+                    $('#passwor').attr('style','border: 1px solid #dde6ef;');  
+                    eleme.style.display='none';
+                    eleme2.style.display='none';
+                }else{ 
+                    $('#passwor2').attr('style','border: 1px solid #ca223c;');
+                    $('#passwor').attr('style','border: 1px solid #ca223c;');
+                    document.getElementById('passwor').value = ''; 
+                    document.getElementById('passwor2').value = ''; 
+                    eleme.style.display='block';
+                    eleme2.style.display='block';
                 }
 		    });
         </script>

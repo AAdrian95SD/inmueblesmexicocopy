@@ -1126,9 +1126,32 @@ class Controller {
         }
         return $datos;
     }
+
+    public function getAllPlanesById($Id){
+        try {
+            $sql = "SELECT * FROM planes WHERE id=".$Id;
+            /* genera la conexión a la db */
+            $this->connectBD();
+
+            $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Manejo de errores
+            $q = $this->conexion->prepare($sql);
+
+            $q->execute();
+
+            $datos = $q->fetchAll();
+            
+            $res['sts'] = 1;
+
+            $this->conexion = null;
+        } catch (PDOException $e) {
+            $res['sts'] = 0;
+        }
+        return $datos;
+    }
+
     public function getPlanesByid_agente($Id){
         try {
-            $sql = "SELECT planes.id, planes.num_propiedades, agente_plan.id_agente FROM agente_plan INNER JOIN planes WHERE agente_plan.id_plan=planes.id AND agente_plan.id_agente=".$Id.";";
+            $sql = "SELECT planes.id, planes.num_propiedades, planes.costo, planes.tiempo, agente_plan.id_agente FROM agente_plan INNER JOIN planes WHERE agente_plan.id_plan=planes.id AND agente_plan.id_agente=".$Id.";";
             /* genera la conexión a la db */
             $this->connectBD(); 
             $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //Manejo de errores

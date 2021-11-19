@@ -27,7 +27,7 @@ switch ($_POST["submit"]){
             //$_SESSION['agentes'] = $agentes;
             $_SESSION['login'] = true;
             $_SESSION['login_id'] = $respuesta['userID'];
-            header("location: webadmin/Suscripcion.php");
+            header("location: webadmin/index.php");
             die();    
         }else{
             if (!isset($_SESSION)) { session_start();}
