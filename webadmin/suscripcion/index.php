@@ -92,23 +92,20 @@
 ?> 
     <div class="columns">
         <ul class="price">
-            <li class="header">Costo por <?php if($dato[1] > 1 ){ echo $dato[1]." Meses"; }else{ echo  $dato[1]." Mes"; } ?></li>
-            <li class="grey">$ <?php echo  number_format($dato[2],2);?> / Cada <?php if($dato[1] > 1 ){ echo $dato[1]." Meses"; }else{ echo  $dato[1]." Mes"; } ?> </li>
-            <li><b>El plan incluye:</b></li> 
-            <li style="text-align: left;">
-              <ul>
-                <li style="text-align: left;"> Publicacion de  <?php echo $dato[3];?> Propiedades en el sitio.</li> 
+            <li class="header"> <?php echo $dato[1]; ?></li>
+            <li class="grey">$ <?php echo  number_format($dato[3],2);?><?php if($dato[2] == 1 ){ echo " / Mes"; }else{ echo  "<br>".$dato[2]; } ?> </li>
+            <li><b> <?php $da = substr($dato[4], 0, 1); if($da>0){ echo "Publica de ".$dato[4]." Propiedades"; }else{ echo $dato[4];}?> </b></li> 
+            <li style="text-align: left;"> 
                 <?php
-                  if($dato[5] != ""){
+                  if($dato[6] != ""){
                     echo "<li style='text-align: left;'>";
-                    echo $dato[5];
+                    echo $dato[6];
                     echo "</li>";
                   }
-                ?>  
-              </ul>
+                ?>   
             </li> 
             <li class="grey"> 
-                <a href="<?php echo RUTA ?>suscripcion/checkout.php?code=<?php echo $dato[4]; ?>&id_=<?php echo $dato[0]; ?>" class="button">Subscribe</a>
+                <a href="<?php echo RUTA ?>suscripcion/checkout.php?code=<?php echo $dato[5]; ?>&id_=<?php echo $dato[0]; ?>" class="button">Subscribe</a>
             </li>
         </ul>
     </div>
