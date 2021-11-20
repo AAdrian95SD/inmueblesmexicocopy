@@ -132,7 +132,7 @@ require 'header.view.php';
                                         <div>
                                         </div>
                                         <div class="">
-                                            <h3>Facturacion</h3>
+                                            <h3>Vigencia</h3>
                                             <h5>El Pago de la subscripcion es atraves de Stripe</h5>
                                             <h5>Proximo pago <?php 
                                             $reDate = date("m")+$Planes[0][4];
